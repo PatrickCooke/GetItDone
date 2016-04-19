@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  DetailViewController.h
 //  GetItDone
 //
 //  Created by Patrick Cooke on 4/19/16.
@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ToDoItem.h"
 
-@interface ViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface DetailViewController : UIViewController
 
+@property(nonatomic,strong) ToDoItem *selectedToDo;
 
 @end
-
