@@ -10,18 +10,30 @@
 
 @interface DetailViewController ()
 
+@property(nonatomic,weak) IBOutlet UILabel    *todoNameLabel;
+@property(nonatomic,weak) IBOutlet UILabel    *todopriorityLabel;
+@property(nonatomic,weak) IBOutlet UILabel    *todoOptionalDateLabel;
+@property(nonatomic,weak) IBOutlet UILabel    *todoDeadlineDateLable;
+@property(nonatomic,weak) IBOutlet UITextView *todoDescriptionTextView;
+
+
+
 @end
 
 @implementation DetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    _todoNameLabel.text = _selectedToDo.todoName;
+    _todopriorityLabel.text = [NSString stringWithFormat:@"This is a %@ priority ToDo",_selectedToDo.todoPriority];
+    _todoOptionalDateLabel.text = [NSString stringWithFormat:@"%@", _selectedToDo.todoOptionalDueDate];
+    _todoDeadlineDateLable.text = [NSString stringWithFormat:@"%@", _selectedToDo.todoCompletionDate];
+    _todoDescriptionTextView.text = _selectedToDo.todoDescription;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
 }
 
 /*

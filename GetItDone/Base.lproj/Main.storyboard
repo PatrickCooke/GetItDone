@@ -50,6 +50,10 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="hUe-tc-Ukt"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="g8u-KR-Lda"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -61,6 +65,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="GetItDone" id="jpV-ab-SBV"/>
+                    <connections>
+                        <outlet property="todoTableView" destination="Jtf-lw-YeY" id="Whq-1O-lP1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -148,6 +155,13 @@
                             <constraint firstAttribute="trailingMargin" secondItem="yO3-Ac-9X6" secondAttribute="trailing" id="yli-CL-dbk"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="todoDeadlineDateLable" destination="yO3-Ac-9X6" id="V9U-He-GLg"/>
+                        <outlet property="todoDescriptionTextView" destination="tVl-BU-H0u" id="TKS-Cc-bX2"/>
+                        <outlet property="todoNameLabel" destination="eVu-lk-Wl9" id="5dp-fr-8vd"/>
+                        <outlet property="todoOptionalDateLabel" destination="NjD-0H-OKC" id="y4N-5G-Jw6"/>
+                        <outlet property="todopriorityLabel" destination="dlw-95-Ggg" id="mD0-Wl-Ouf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zEt-cs-py1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
