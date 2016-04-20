@@ -19,6 +19,7 @@
 @property (nonatomic, strong)           NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong)           NSArray                *todoArray;
 @property (nonatomic,weak)    IBOutlet  UITableView            *todoTableView;
+@property (nonatomic,weak)    IBOutlet  UIBarButtonItem        *sortbutton;
 
 @end
 
@@ -91,6 +92,11 @@ BOOL sortBool = true;
 -(IBAction)sortButtonPressed:(id)sender {
     sortBool = !sortBool;
     [self refreshDataAndTable];
+    if (sortBool) {
+        _sortbutton.title = @"Priority Sort";
+    } else {
+        _sortbutton.title = @"Category Sort";
+    }
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -134,7 +140,11 @@ BOOL sortBool = true;
     }
 
     iCell.textLabel.font = [UIFont fontWithName:@"Verdana" size:18.0 ];
-    iCell.detailTextLabel.font = [UIFont fontWithName:@"Courier" size:12.0];
+    if (sortBool){
+        iCell.detailTextLabel.font = [UIFont fontWithName:@"Courier" size:12.0];
+    }else if (!sortBool){
+        iCell.detailTextLabel.font = [UIFont fontWithName:@"Verdana" size:18.0];
+    }
     iCell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     tableView.separatorColor=[UIColor darkGrayColor];
     return iCell;

@@ -15,7 +15,6 @@
 @property (nonatomic,strong)        AppDelegate  *appDelegate;
 @property (nonatomic,strong)    NSManagedObjectContext *managedObjectContext;
 @property(nonatomic,weak) IBOutlet UITextField    *todoNametitle;
-@property(nonatomic,weak) IBOutlet UILabel    *todoNameLabel;
 @property(nonatomic,weak) IBOutlet UISegmentedControl    *todoprioritySegControl;
 @property(nonatomic,weak) IBOutlet UIDatePicker         *todoOptionalDatePicker;
 @property(nonatomic,weak) IBOutlet UIDatePicker         *todoFinalDatePicker;
@@ -24,6 +23,7 @@
 @property(nonatomic,weak) IBOutlet UILabel      *completionLabel;
 @property(nonatomic,weak) IBOutlet UILabel      *completionDateLabel;
 @property(nonatomic,weak) IBOutlet UITextView *todoDescriptionTextView;
+@property(nonatomic,weak) IBOutlet UITextField  *todoCategoryTextField;
 
 
 
@@ -47,6 +47,7 @@
     _selectedToDo.todoPriority = priorityint;
     _selectedToDo.todoOptionalDueDate = _todoOptionalDatePicker.date;
     _selectedToDo.todoDescription = _todoDescriptionTextView.text;
+    _selectedToDo.todoCategory = _todoCategoryTextField.text;
     [self saveAndPop];
 }
 
@@ -99,6 +100,7 @@
         _todoOptionalDatePicker.date = [NSDate date];
         _todoFinalDatePicker = nil;
         _todoDescriptionTextView.text = @"";
+        _todoCategoryTextField.text = @"";
     } else {
         NSDate *optionalDueDate = _selectedToDo.todoOptionalDueDate;
         _todoNametitle.text = _selectedToDo.todoName;
@@ -114,6 +116,7 @@
             [_completionDateSwitch setOn: true];
         }
         _todoDescriptionTextView.text = _selectedToDo.todoDescription;
+        _todoCategoryTextField.text = _selectedToDo.todoCategory;
     }
 }
 
