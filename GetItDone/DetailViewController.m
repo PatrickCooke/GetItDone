@@ -7,18 +7,24 @@
 //
 
 #import "DetailViewController.h"
+#import "AppDelegate.h"
 
 @interface DetailViewController ()
 
 
+@property (nonatomic,strong)        AppDelegate  *appDelegate;
+@property (nonatomic,strong)    NSManagedObjectContext *managedObjectContext;
 @property(nonatomic,weak) IBOutlet UITextField    *todoNametitle;
 @property(nonatomic,weak) IBOutlet UILabel    *todoNameLabel;
 @property(nonatomic,weak) IBOutlet UISegmentedControl    *todoprioritySegControl;
 @property(nonatomic,weak) IBOutlet UIDatePicker         *todoOptionalDatePicker;
 @property(nonatomic,weak) IBOutlet UIDatePicker         *todoFinalDatePicker;
 @property(nonatomic,weak) IBOutlet UILabel    *todoOptionalDateLabel;
-@property(nonatomic,weak) IBOutlet UILabel    *todoDeadlineDateLable;
+@property(nonatomic,weak) IBOutlet UISwitch     *completionDateSwitch;
+@property(nonatomic,weak) IBOutlet UILabel      *completionLabel;
+@property(nonatomic,weak) IBOutlet UILabel      *completionDateLabel;
 @property(nonatomic,weak) IBOutlet UITextView *todoDescriptionTextView;
+
 
 
 
@@ -26,14 +32,52 @@
 
 @implementation DetailViewController
 
+
 #pragma mark - Detail Change Method
 
+-(void)saveAndPop {
+    [_appDelegate saveContext];
+    [self.navigationController popViewControllerAnimated:true];
+}
 -(IBAction)savebutton:(id)sender {
-    NSString *priorityint = [NSString stringWithFormat:@"%ld",(long)_todoprioritySegControl.selectedSegmentIndex];
+    NSString *priorityint = [NSString stringWithFormat:@"%ld",(long)_todoprioritySegControl.selectedSegmentIndex + 1];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"M/dd/yy"];
-    NSLog(@"Task Name: %@, Priority Level %@, Optional Date: %@, Final Due Date: %@, Description of the Task: %@",_todoNametitle.text, priorityint, [formatter stringFromDate:_todoOptionalDatePicker.date], [formatter stringFromDate:_todoFinalDatePicker.date], _todoDescriptionTextView.text);
+    _selectedToDo.todoName = _todoNametitle.text;
+    _selectedToDo.todoPriority = priorityint;
+    _selectedToDo.todoOptionalDueDate = _todoOptionalDatePicker.date;
+    _selectedToDo.todoDescription = _todoDescriptionTextView.text;
+    [self saveAndPop];
 }
+
+-(IBAction)deleteButtonPressed:(id)sender {
+    NSLog(@"Delete");
+    [_managedObjectContext deleteObject:_selectedToDo];
+    [self saveAndPop];
+}
+
+-(NSString *)formatDate:(NSDate *)date {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"MMMM d, yyyy";
+    return [formatter stringFromDate:date];
+}
+
+-(IBAction)completionSwitchPressed:(id)sender {
+    if (_completionDateSwitch.isOn) {
+        NSDate *completedtoday = [NSDate date];
+        _selectedToDo.todoCompletionDate = completedtoday;
+        _todoprioritySegControl.selectedSegmentIndex = 4;
+        _completionLabel.text = [NSString stringWithFormat:@"Completed on"];
+        _completionDateLabel.text = [self formatDate: completedtoday];
+    } else {
+        _completionDateLabel.text = nil;
+        _todoprioritySegControl.selectedSegmentIndex = 3;
+        _selectedToDo.todoCompletionDate = nil;
+        _completionLabel.text = [NSString stringWithFormat:@""];
+        _completionDateLabel.text = [NSString stringWithFormat:@""];
+    }
+}
+
 
 
 
@@ -41,34 +85,48 @@
 #pragma mark - Life Cycle Methods
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSDateFormatter *dateFormater = [[NSDateFormatter alloc] init];
-    [dateFormater setDateFormat:@"M-dd-yyyy"];
-    NSDate *optionalDueDate = _selectedToDo.todoOptionalDueDate;
-    NSDate *finalDueDate = _selectedToDo.todoCompletionDate;
-    _todoNametitle.text = _selectedToDo.todoName;
-    NSInteger todoPriorityInt = _selectedToDo.todoPriority.integerValue;
-    _todoprioritySegControl.selectedSegmentIndex = todoPriorityInt - 1;
+    _appDelegate = [[UIApplication sharedApplication] delegate];
+    _managedObjectContext = _appDelegate.managedObjectContext;
+}
 
-    _todoOptionalDatePicker.date = optionalDueDate;
-    _todoFinalDatePicker.date = finalDueDate;
-    //_todoOptionalDateLabel.text = [NSString stringWithFormat:@"Optional Due Date %@", optionalDueDateString];
-    //_todoDeadlineDateLable.text = [NSString stringWithFormat:@"Final Due Date %@", finalDueDateString];
-    _todoDescriptionTextView.text = _selectedToDo.todoDescription;
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (_selectedToDo == nil) {
+        ToDoItem *newtodo = (ToDoItem *) [NSEntityDescription insertNewObjectForEntityForName:@"ToDoItem" inManagedObjectContext:_managedObjectContext];
+        _selectedToDo=newtodo;
+        _todoNametitle.text = @"";
+        _todoprioritySegControl.selectedSegmentIndex = 0;
+        _todoOptionalDatePicker.date = [NSDate date];
+        _todoFinalDatePicker = nil;
+        _todoDescriptionTextView.text = @"";
+    } else {
+        NSDate *optionalDueDate = _selectedToDo.todoOptionalDueDate;
+        _todoNametitle.text = _selectedToDo.todoName;
+        NSInteger todoPriorityInt = _selectedToDo.todoPriority.integerValue;
+        _todoprioritySegControl.selectedSegmentIndex = todoPriorityInt - 1;
+        _todoOptionalDatePicker.date = optionalDueDate;
+        if (_todoprioritySegControl.selectedSegmentIndex <4) {
+            _todoFinalDatePicker = nil;
+            [_completionDateSwitch setOn: false];
+        }else if ((_todoprioritySegControl.selectedSegmentIndex = 4)){
+            _completionLabel.text = [NSString stringWithFormat:@"Completed on"];
+            _completionDateLabel.text = [self formatDate: _selectedToDo.todoCompletionDate];
+            [_completionDateSwitch setOn: true];
+        }
+        _todoDescriptionTextView.text = _selectedToDo.todoDescription;
+    }
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    if ([_managedObjectContext hasChanges]) {
+        [_managedObjectContext rollback];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
