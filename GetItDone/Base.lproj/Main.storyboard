@@ -85,6 +85,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVu-lk-Wl9">
+                                <rect key="frame" x="20" y="72" width="560" height="25.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25.5" id="aer-4P-tOI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Optional ToDo Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NjD-0H-OKC">
                                 <rect key="frame" x="20" y="185" width="560" height="21"/>
                                 <constraints>
@@ -103,9 +112,12 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="tVl-BU-H0u">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" text="Description" translatesAutoresizingMaskIntoConstraints="NO" id="tVl-BU-H0u">
                                 <rect key="frame" x="20" y="421" width="560" height="159"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="159" id="lXC-MJ-s5p"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -119,9 +131,6 @@
                                     <segment title="2"/>
                                     <segment title="3"/>
                                 </segments>
-                                <connections>
-                                    <action selector="savebutton:" destination="z5C-ld-rAG" eventType="valueChanged" id="tCy-DR-PIf"/>
-                                </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Priority Level" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axd-wp-jWF">
                                 <rect key="frame" x="20" y="119" width="560" height="21"/>
@@ -147,26 +156,24 @@
                                     <!--2016-04-19 20:20:05 +0000-->
                                 </date>
                             </datePicker>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVu-lk-Wl9">
-                                <rect key="frame" x="20" y="72" width="560" height="25.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="25.5" id="aer-4P-tOI"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="task name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Na-OO-cgo">
+                                <rect key="frame" x="20" y="72" width="560" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="leadingMargin" secondItem="axd-wp-jWF" secondAttribute="leading" id="19q-45-AEg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="eVu-lk-Wl9" secondAttribute="trailing" id="25o-rI-ZbL"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="9Na-OO-cgo" secondAttribute="leading" id="2Ff-8f-SHD"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Ky0-ef-si9" secondAttribute="trailing" constant="-20" id="59v-98-Xzm"/>
                             <constraint firstAttribute="leadingMargin" secondItem="yO3-Ac-9X6" secondAttribute="leading" id="5GY-9o-sEO"/>
                             <constraint firstAttribute="leadingMargin" secondItem="eVu-lk-Wl9" secondAttribute="leading" id="6vU-hV-Ly3"/>
                             <constraint firstItem="BBg-vV-EN9" firstAttribute="leading" secondItem="KQf-27-BCo" secondAttribute="leadingMargin" constant="-20" id="77a-eJ-eB4"/>
                             <constraint firstItem="tVl-BU-H0u" firstAttribute="top" secondItem="yO3-Ac-9X6" secondAttribute="bottom" constant="97" id="9aV-6x-xCl"/>
                             <constraint firstAttribute="trailingMargin" secondItem="BBg-vV-EN9" secondAttribute="trailing" constant="-20" id="Bbe-68-f85"/>
+                            <constraint firstItem="9Na-OO-cgo" firstAttribute="top" secondItem="dcm-5A-44o" secondAttribute="bottom" constant="8" id="Cjn-31-E8t"/>
                             <constraint firstItem="yO3-Ac-9X6" firstAttribute="top" secondItem="BBg-vV-EN9" secondAttribute="bottom" constant="8" id="Dad-gy-wzh"/>
                             <constraint firstAttribute="trailingMargin" secondItem="yO3-Ac-9X6" secondAttribute="trailing" id="G4F-85-FDp"/>
                             <constraint firstAttribute="trailingMargin" secondItem="NjD-0H-OKC" secondAttribute="trailing" id="IC8-fb-Ow0"/>
@@ -187,6 +194,7 @@
                             <constraint firstItem="BBg-vV-EN9" firstAttribute="top" secondItem="dcm-5A-44o" secondAttribute="bottom" constant="150" id="rnR-0l-eaU"/>
                             <constraint firstAttribute="trailingMargin" secondItem="sgv-q2-Idg" secondAttribute="trailing" id="tKx-TF-Ij7"/>
                             <constraint firstItem="NjD-0H-OKC" firstAttribute="top" secondItem="sgv-q2-Idg" secondAttribute="bottom" constant="9" id="uQh-7t-5IG"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9Na-OO-cgo" secondAttribute="trailing" id="vOC-oj-NJK"/>
                             <constraint firstItem="sgv-q2-Idg" firstAttribute="top" secondItem="axd-wp-jWF" secondAttribute="bottom" constant="8" id="zpD-BB-3J6"/>
                         </constraints>
                         <variation key="default">
@@ -198,13 +206,18 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="WlG-P1-Og0">
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="4Wl-qi-nRU"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="4Wl-qi-nRU">
+                            <connections>
+                                <action selector="savebutton:" destination="z5C-ld-rAG" id="cFR-AM-9UF"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="todoDeadlineDateLable" destination="yO3-Ac-9X6" id="V9U-He-GLg"/>
                         <outlet property="todoDescriptionTextView" destination="tVl-BU-H0u" id="TKS-Cc-bX2"/>
                         <outlet property="todoFinalDatePicker" destination="Ky0-ef-si9" id="5Q4-JV-UM8"/>
                         <outlet property="todoNameLabel" destination="eVu-lk-Wl9" id="5dp-fr-8vd"/>
+                        <outlet property="todoNametitle" destination="9Na-OO-cgo" id="xIc-9i-upa"/>
                         <outlet property="todoOptionalDateLabel" destination="NjD-0H-OKC" id="y4N-5G-Jw6"/>
                         <outlet property="todoOptionalDatePicker" destination="BBg-vV-EN9" id="cle-mr-CRj"/>
                         <outlet property="todoprioritySegControl" destination="sgv-q2-Idg" id="Zqh-Lg-CgD"/>

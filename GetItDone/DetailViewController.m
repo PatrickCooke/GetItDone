@@ -11,7 +11,7 @@
 @interface DetailViewController ()
 
 
-@property(nonatomic,weak) IBOutlet UINavigationBar    *todoNametitle;
+@property(nonatomic,weak) IBOutlet UITextField    *todoNametitle;
 @property(nonatomic,weak) IBOutlet UILabel    *todoNameLabel;
 @property(nonatomic,weak) IBOutlet UISegmentedControl    *todoprioritySegControl;
 @property(nonatomic,weak) IBOutlet UIDatePicker         *todoOptionalDatePicker;
@@ -29,7 +29,10 @@
 #pragma mark - Detail Change Method
 
 -(IBAction)savebutton:(id)sender {
-
+    NSString *priorityint = [NSString stringWithFormat:@"%ld",(long)_todoprioritySegControl.selectedSegmentIndex];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"M/dd/yy"];
+    NSLog(@"Task Name: %@, Priority Level %@, Optional Date: %@, Final Due Date: %@, Description of the Task: %@",_todoNametitle.text, priorityint, [formatter stringFromDate:_todoOptionalDatePicker.date], [formatter stringFromDate:_todoFinalDatePicker.date], _todoDescriptionTextView.text);
 }
 
 
@@ -42,7 +45,7 @@
     [dateFormater setDateFormat:@"M-dd-yyyy"];
     NSDate *optionalDueDate = _selectedToDo.todoOptionalDueDate;
     NSDate *finalDueDate = _selectedToDo.todoCompletionDate;
-    _todoNameLabel.text = _selectedToDo.todoName;
+    _todoNametitle.text = _selectedToDo.todoName;
     NSInteger todoPriorityInt = _selectedToDo.todoPriority.integerValue;
     _todoprioritySegControl.selectedSegmentIndex = todoPriorityInt - 1;
 
