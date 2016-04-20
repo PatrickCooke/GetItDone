@@ -67,6 +67,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="GetItDone" id="jpV-ab-SBV">
+                        <barButtonItem key="leftBarButtonItem" title="Sort" id="Inu-Eg-RkH">
+                            <connections>
+                                <action selector="sortButtonPressed:" destination="BYZ-38-t0r" id="9UZ-Dg-FbQ"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="fNY-BW-6yo">
                             <color key="tintColor" red="0.1728462455" green="0.76862745099999996" blue="0.70206931390000005" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>

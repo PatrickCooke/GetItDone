@@ -14,9 +14,9 @@
 		4341EFFE1CC691C200C5E2E8 /* GetItDone.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4341EFFC1CC691C200C5E2E8 /* GetItDone.xcdatamodeld */; };
 		4341F0001CC691C200C5E2E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4341EFFF1CC691C200C5E2E8 /* Assets.xcassets */; };
 		4341F0031CC691C200C5E2E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4341F0011CC691C200C5E2E8 /* LaunchScreen.storyboard */; };
-		4341F00E1CC69E6400C5E2E8 /* ToDoItem+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 4341F00B1CC69E6400C5E2E8 /* ToDoItem+CoreDataProperties.m */; };
-		4341F00F1CC69E6400C5E2E8 /* ToDoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4341F00D1CC69E6400C5E2E8 /* ToDoItem.m */; };
 		4341F0131CC6A7F800C5E2E8 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4341F0121CC6A7F800C5E2E8 /* DetailViewController.m */; };
+		4341F0211CC81DF500C5E2E8 /* ToDoItem+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 4341F01E1CC81DF500C5E2E8 /* ToDoItem+CoreDataProperties.m */; };
+		4341F0221CC81DF500C5E2E8 /* ToDoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4341F0201CC81DF500C5E2E8 /* ToDoItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,12 +31,12 @@
 		4341EFFF1CC691C200C5E2E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4341F0021CC691C200C5E2E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4341F0041CC691C200C5E2E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4341F00A1CC69E6400C5E2E8 /* ToDoItem+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ToDoItem+CoreDataProperties.h"; sourceTree = "<group>"; };
-		4341F00B1CC69E6400C5E2E8 /* ToDoItem+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ToDoItem+CoreDataProperties.m"; sourceTree = "<group>"; };
-		4341F00C1CC69E6400C5E2E8 /* ToDoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToDoItem.h; sourceTree = "<group>"; };
-		4341F00D1CC69E6400C5E2E8 /* ToDoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoItem.m; sourceTree = "<group>"; };
 		4341F0111CC6A7F800C5E2E8 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		4341F0121CC6A7F800C5E2E8 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		4341F01D1CC81DF500C5E2E8 /* ToDoItem+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ToDoItem+CoreDataProperties.h"; sourceTree = "<group>"; };
+		4341F01E1CC81DF500C5E2E8 /* ToDoItem+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ToDoItem+CoreDataProperties.m"; sourceTree = "<group>"; };
+		4341F01F1CC81DF500C5E2E8 /* ToDoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToDoItem.h; sourceTree = "<group>"; };
+		4341F0201CC81DF500C5E2E8 /* ToDoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,11 +96,11 @@
 		4341F0101CC69E6F00C5E2E8 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				4341F01D1CC81DF500C5E2E8 /* ToDoItem+CoreDataProperties.h */,
+				4341F01E1CC81DF500C5E2E8 /* ToDoItem+CoreDataProperties.m */,
+				4341F01F1CC81DF500C5E2E8 /* ToDoItem.h */,
+				4341F0201CC81DF500C5E2E8 /* ToDoItem.m */,
 				4341EFFC1CC691C200C5E2E8 /* GetItDone.xcdatamodeld */,
-				4341F00A1CC69E6400C5E2E8 /* ToDoItem+CoreDataProperties.h */,
-				4341F00B1CC69E6400C5E2E8 /* ToDoItem+CoreDataProperties.m */,
-				4341F00C1CC69E6400C5E2E8 /* ToDoItem.h */,
-				4341F00D1CC69E6400C5E2E8 /* ToDoItem.m */,
 			);
 			name = data;
 			sourceTree = "<group>";
@@ -176,12 +176,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4341F00F1CC69E6400C5E2E8 /* ToDoItem.m in Sources */,
-				4341F00E1CC69E6400C5E2E8 /* ToDoItem+CoreDataProperties.m in Sources */,
 				4341EFF81CC691C200C5E2E8 /* ViewController.m in Sources */,
 				4341EFFE1CC691C200C5E2E8 /* GetItDone.xcdatamodeld in Sources */,
+				4341F0221CC81DF500C5E2E8 /* ToDoItem.m in Sources */,
 				4341EFF51CC691C200C5E2E8 /* AppDelegate.m in Sources */,
 				4341EFF21CC691C200C5E2E8 /* main.m in Sources */,
+				4341F0211CC81DF500C5E2E8 /* ToDoItem+CoreDataProperties.m in Sources */,
 				4341F0131CC6A7F800C5E2E8 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

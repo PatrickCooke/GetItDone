@@ -2,7 +2,7 @@
 //  ToDoItem+CoreDataProperties.m
 //  GetItDone
 //
-//  Created by Patrick Cooke on 4/19/16.
+//  Created by Patrick Cooke on 4/20/16.
 //  Copyright © 2016 Patrick Cooke. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -18,5 +18,6 @@
 @dynamic todoOptionalDueDate;
 @dynamic todoCompletionDate;
 @dynamic todoPriority;
+@dynamic todoCategory;
 
 @end

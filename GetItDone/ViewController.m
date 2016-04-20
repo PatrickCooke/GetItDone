@@ -24,6 +24,10 @@
 
 @implementation ViewController
 
+#pragma mark - Global Variables
+
+BOOL sortBool = true;
+
 #pragma mark - Save/Recall Method
 
 -(void) refreshDataAndTable {
@@ -40,18 +44,21 @@
     [newToDo setTodoDescription:@"Get thing 1, thing 2, thing 3, and thing 4 done."];
     [newToDo setTodoCompletionDate: [NSDate dateWithTimeIntervalSinceNow:24 * 60 * 60]];
     [newToDo setTodoOptionalDueDate: [NSDate date]];
+    [newToDo setTodoCategory:@"D"];
     ToDoItem *newToDo2 = (ToDoItem *) [NSEntityDescription insertNewObjectForEntityForName:@"ToDoItem" inManagedObjectContext:_managedObjectContext];
     [newToDo2 setTodoName:@"Watch Star Wars"];
     [newToDo2 setTodoPriority:@"2"];
     [newToDo2 setTodoDescription:@"Go home and watch the original Trilogy."];
     [newToDo2 setTodoCompletionDate: [NSDate dateWithTimeIntervalSinceNow:3 * 24 * 60 * 60]];
     [newToDo2 setTodoOptionalDueDate: [NSDate date]];
+    [newToDo2 setTodoCategory:@"D"];
     ToDoItem *newToDo3 = (ToDoItem *) [NSEntityDescription insertNewObjectForEntityForName:@"ToDoItem" inManagedObjectContext:_managedObjectContext];
     [newToDo3 setTodoName:@"Get Homework Done"];
     [newToDo3 setTodoPriority:@"3"];
     [newToDo3 setTodoDescription:@"Code what Tom assigned."];
     [newToDo3 setTodoCompletionDate: [NSDate dateWithTimeIntervalSinceNow:2 * 24 * 60 * 60]];
     [newToDo3 setTodoOptionalDueDate: [NSDate date]];
+    [newToDo3 setTodoCategory:@"A"];
     [_appDelegate saveContext];
 }
 
@@ -61,18 +68,18 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"ToDoItem" inManagedObjectContext:_managedObjectContext];
     [fetchRequest setEntity:entity];
     //sort by priority level code
-//    if (button = a) {
-//        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"todoPriority" ascending:true];
-//        NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"todoOptionalDueDate" ascending:true];
-//        [fetchRequest setSortDescriptors:@[sortDescriptor,sortDescriptor2]];
-//    } else if (button = b){
-//        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"todoPriority" ascending:true];
-//        NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"todoOptionalDueDate" ascending:true];
-//        [fetchRequest setSortDescriptors:@[sortDescriptor,sortDescriptor2]];
-//    }
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"todoPriority" ascending:true];
-    NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"todoOptionalDueDate" ascending:true];
-    [fetchRequest setSortDescriptors:@[sortDescriptor,sortDescriptor2]];
+    if (sortBool) {
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"todoPriority" ascending:true];
+        NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"todoOptionalDueDate" ascending:true];
+        [fetchRequest setSortDescriptors:@[sortDescriptor,sortDescriptor2]];
+    } else if (!sortBool){
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"todoCategory" ascending:true];
+        NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"todoPriority" ascending:true];
+        [fetchRequest setSortDescriptors:@[sortDescriptor,sortDescriptor2]];
+    }
+//    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"todoPriority" ascending:true];
+//    NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"todoOptionalDueDate" ascending:true];
+//    [fetchRequest setSortDescriptors:@[sortDescriptor,sortDescriptor2]];
     //end of sort code
     NSError *error;
     NSArray *fetchResults = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
@@ -80,6 +87,11 @@
             }
 
 #pragma mark - ToDo Table View Methods
+
+-(IBAction)sortButtonPressed:(id)sender {
+    sortBool = !sortBool;
+    [self refreshDataAndTable];
+}
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _todoArray.count;
@@ -89,29 +101,38 @@
     UITableViewCell *iCell = (UITableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     ToDoItem *currentToDo = _todoArray[indexPath.row];
     iCell.textLabel.text = [currentToDo todoName];
-    iCell.detailTextLabel.text = [currentToDo todoPriority];
+    if (sortBool) {
+        iCell.detailTextLabel.text = [currentToDo todoPriority];
+    }else{
+        iCell.detailTextLabel.text = [currentToDo todoCategory];
+    }
     //coloring details
-    if ([iCell.detailTextLabel.text isEqualToString:@"1"]) {
+    if ([currentToDo.todoPriority isEqualToString:@"1"]) {
         iCell.backgroundColor = [UIColor blackColor];
         iCell.textLabel.textColor = [UIColor whiteColor];
         iCell.detailTextLabel.textColor = [UIColor whiteColor];
-    } else if ([iCell.detailTextLabel.text isEqualToString:@"2"]){
+    } else if ([currentToDo.todoPriority isEqualToString:@"2"]){
         iCell.backgroundColor = [UIColor darkGrayColor];
         iCell.textLabel.textColor = [UIColor whiteColor];
         iCell.detailTextLabel.textColor = [UIColor whiteColor];
-    } else if ([iCell.detailTextLabel.text isEqualToString:@"3"]) {
+    } else if ([currentToDo.todoPriority isEqualToString:@"3"]) {
         iCell.backgroundColor = [UIColor lightGrayColor];
         iCell.textLabel.textColor = [UIColor whiteColor];
         iCell.detailTextLabel.textColor = [UIColor whiteColor];
-    }else if ([iCell.detailTextLabel.text isEqualToString:@"4"]) {
+    }else if ([currentToDo.todoPriority isEqualToString:@"4"]) {
         iCell.backgroundColor = [UIColor whiteColor];
         iCell.textLabel.textColor = [UIColor blackColor];
         iCell.detailTextLabel.textColor = [UIColor blackColor];
-    }    else if ([iCell.detailTextLabel.text isEqualToString:@"5"]) {
-            iCell.backgroundColor = [UIColor whiteColor];
-            iCell.textLabel.textColor = [UIColor lightGrayColor];
-            iCell.detailTextLabel.textColor = [UIColor lightGrayColor];
+    }else if ([currentToDo.todoPriority isEqualToString:@"5"]) {
+        iCell.backgroundColor = [UIColor whiteColor];
+        iCell.textLabel.textColor = [UIColor lightGrayColor];
+        iCell.detailTextLabel.textColor = [UIColor lightGrayColor];
+    }else{
+        iCell.backgroundColor = [UIColor whiteColor];
+        iCell.textLabel.textColor = [UIColor blackColor];
+        iCell.detailTextLabel.textColor = [UIColor lightGrayColor];
     }
+
     iCell.textLabel.font = [UIFont fontWithName:@"Verdana" size:18.0 ];
     iCell.detailTextLabel.font = [UIFont fontWithName:@"Courier" size:12.0];
     iCell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
@@ -159,7 +180,7 @@
     [super viewDidLoad];
     _appDelegate = [[UIApplication sharedApplication] delegate];
     _managedObjectContext = _appDelegate.managedObjectContext;
-//    [self tempAddRecords];
+   //[self tempAddRecords];
     _todoArray = [self fetchToDo];
     NSLog(@"Count %li", _todoArray.count);
 }

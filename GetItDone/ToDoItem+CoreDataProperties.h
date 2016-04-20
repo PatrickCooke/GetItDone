@@ -2,7 +2,7 @@
 //  ToDoItem+CoreDataProperties.h
 //  GetItDone
 //
-//  Created by Patrick Cooke on 4/19/16.
+//  Created by Patrick Cooke on 4/20/16.
 //  Copyright © 2016 Patrick Cooke. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSDate *todoOptionalDueDate;
 @property (nullable, nonatomic, retain) NSDate *todoCompletionDate;
 @property (nullable, nonatomic, retain) NSString *todoPriority;
+@property (nullable, nonatomic, retain) NSString *todoCategory;
 
 @end
 

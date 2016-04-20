@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15D21" minimumToolsVersion="Automatic">
     <entity name="ToDoItem" representedClassName="ToDoItem" syncable="YES">
+        <attribute name="todoCategory" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="todoCompletionDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="todoDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="todoName" optional="YES" attributeType="String" syncable="YES"/>
@@ -8,6 +9,6 @@
         <attribute name="todoPriority" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ToDoItem" positionX="-45" positionY="0" width="128" height="118"/>
+        <element name="ToDoItem" positionX="-45" positionY="0" width="128" height="133"/>
     </elements>
 </model>
