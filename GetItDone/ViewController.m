@@ -114,21 +114,21 @@ BOOL sortBool = true;
     }
     //coloring details
     if ([currentToDo.todoPriority isEqualToString:@"1"]) {
-        iCell.backgroundColor = [UIColor blackColor];
+        iCell.backgroundColor = [UIColor colorWithRed:(0/255.0) green:(60/255.0) blue:(64/255.0) alpha:1];
         iCell.textLabel.textColor = [UIColor whiteColor];
-        iCell.detailTextLabel.textColor = [UIColor whiteColor];
+        iCell.detailTextLabel.textColor = [UIColor colorWithRed:(0/255.0) green:(121/255.0) blue:(127/255.0) alpha:1];
     } else if ([currentToDo.todoPriority isEqualToString:@"2"]){
-        iCell.backgroundColor = [UIColor darkGrayColor];
-        iCell.textLabel.textColor = [UIColor whiteColor];
-        iCell.detailTextLabel.textColor = [UIColor whiteColor];
+        iCell.backgroundColor = [UIColor colorWithRed:(0/255.0) green:(181/255.0) blue:(191/255.0) alpha:1];
+        iCell.textLabel.textColor = [UIColor colorWithRed:(0/255.0) green:(60/255.0) blue:(64/255.0) alpha:1];
+        iCell.detailTextLabel.textColor = [UIColor colorWithRed:(0/255.0) green:(121/255.0) blue:(127/255.0) alpha:1];
     } else if ([currentToDo.todoPriority isEqualToString:@"3"]) {
-        iCell.backgroundColor = [UIColor lightGrayColor];
-        iCell.textLabel.textColor = [UIColor whiteColor];
-        iCell.detailTextLabel.textColor = [UIColor whiteColor];
+        iCell.backgroundColor = [UIColor colorWithRed:(0/255.0) green:(242/255.0) blue:(255/255.0) alpha:1];
+        iCell.textLabel.textColor = [UIColor colorWithRed:(0/255.0) green:(60/255.0) blue:(64/255.0) alpha:1];;
+        iCell.detailTextLabel.textColor = [UIColor colorWithRed:(0/255.0) green:(121/255.0) blue:(127/255.0) alpha:1];
     }else if ([currentToDo.todoPriority isEqualToString:@"4"]) {
         iCell.backgroundColor = [UIColor whiteColor];
-        iCell.textLabel.textColor = [UIColor blackColor];
-        iCell.detailTextLabel.textColor = [UIColor blackColor];
+        iCell.textLabel.textColor = [UIColor colorWithRed:(0/255.0) green:(60/255.0) blue:(64/255.0) alpha:1];
+        iCell.detailTextLabel.textColor = [UIColor colorWithRed:(0/255.0) green:(60/255.0) blue:(64/255.0) alpha:1];
     }else if ([currentToDo.todoPriority isEqualToString:@"5"]) {
         iCell.backgroundColor = [UIColor whiteColor];
         iCell.textLabel.textColor = [UIColor lightGrayColor];
